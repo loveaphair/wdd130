@@ -5,30 +5,66 @@
   <title>GitHub Links Generator</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Arial', sans-serif;
       padding: 2rem;
       max-width: 600px;
       margin: auto;
+      background-color: #f4f4f9;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
     }
-    label, input, button {
-      font-size: 1rem;
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
     }
     input {
       width: 100%;
       padding: 0.5rem;
       margin: 0.5rem 0 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #results {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #ecf0f1;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     a {
-      display: block;
-      margin: 0.5rem 0;
+      color: #3498db;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <h1>GitHub Link Generator</h1>
-  <label for="username">GitHub Username:</label>
-  <input type="text" id="username" placeholder="Enter GitHub username">
-  <button onclick="generateLinks()">Generate Links</button>
+  <form onsubmit="generateLinks(); return false;">
+    <label for="username">GitHub Username:</label>
+    <input type="text" id="username" placeholder="Enter GitHub username">
+    <button type="submit">Generate Links</button>
+  </form>
 
   <div id="results" style="margin-top: 1rem;"></div>
 
@@ -44,10 +80,12 @@
 
       const repoLink = `https://github.com/${username}/wdd130`;
       const pagesLink = `https://${username}.github.io/wdd130`;
+      const raftingLink = `https://${username}.github.io/wwr/about.html`;
 
       results.innerHTML = `
         <p><strong>GitHub Repo:</strong> <a href="${repoLink}" target="_blank">${repoLink}</a></p>
-        <p><strong>GitHub Pages:</strong> <a href="${pagesLink}" target="_blank">${pagesLink}</a></p>
+        <p><strong>GitHub Home Page:</strong> <a href="${pagesLink}" target="_blank">${pagesLink}</a></p>
+        <p><strong>Rafting Site:</strong> <a href="${raftingLink}" target="_blank">${raftingLink}</a></p>
       `;
     }
   </script>
