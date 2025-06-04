@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WDD130 Link Generator</title>
+  <link rel="stylesheet" href="../styles/githublinkstyles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">Page Evaluations</div>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <ul class="nav-links">
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/" target="_blank">Course Home</a></li>
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/grader/w01-homepage.html" target="_blank">Week 01</a></li>
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/grader/w02-homepage.html" target="_blank">Week 02</a></li>
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/grader/w03-project-about.html" target="_blank">Week 03</a></li>
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/grader/w04-project-aboutus.html" target="_blank">Week 04</a></li>
+        <li><a href="https://byui-cse.github.io/wdd130-ww-course/grader/w05-project-contact.html" target="_blank">Week 05</a></li>
+      </ul>
+    </div>
+  </nav>
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+      const menuIcon = document.querySelector('.menu-icon');
+      menuIcon.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+    }
+  </script>
+
+  <div class="container">
+    <h1>WDD130 Link Generator</h1>
+    <form onsubmit="generateLinks(); return false;">
+      <label for="username">GitHub Username:</label>
+      <input type="text" id="username" placeholder="Enter GitHub username">
+      <button type="submit">Generate Links</button>
+    </form>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    function generateLinks() {
+      const username = document.getElementById('username').value.trim();
+      const results = document.getElementById('results');
+
+      if (username === '') {
+        results.innerHTML = '<p>Please enter a username.</p>';
+        return;
+      }
+
+      if (/[/]|https|:\/\//.test(username)) {
+        results.innerHTML = '<p>Invalid username. Please enter a valid GitHub username.</p>';
+        return;
+      }
+
+      const repoLink = `https://github.com/${username}/wdd130`;
+      const pagesLink = `https://${username}.github.io/wdd130`;
+      const raftingLink = `https://${username}.github.io/wdd130/wwr/about.html`;
+      const contactLink = `https://${username}.github.io/wdd130/wwr/contact.html`;
+
+      results.innerHTML = `
+        <p><strong>GitHub Repo:</strong> <a href="${repoLink}" target="_blank">${repoLink}</a></p>
+        <p><strong>GitHub Home Page:</strong> <a href="${pagesLink}" target="_blank">${pagesLink}</a></p>
+        <p><strong>Rafting Site:</strong> <a href="${raftingLink}" target="_blank">${raftingLink}</a></p>
+        <p><strong>Contact Page:</strong> <a href="${contactLink}" target="_blank">${contactLink}</a></p>
+      `;
+    }
+  </script>
+</body>
+</html>
