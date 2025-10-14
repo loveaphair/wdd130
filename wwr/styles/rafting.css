@@ -221,6 +221,10 @@ main {
 	width: 100%;
 }
 
+.checks {
+	grid-column: span 2;
+}
+
 .radio-group {
 	display: grid;
 	grid-template-columns: auto 1fr;

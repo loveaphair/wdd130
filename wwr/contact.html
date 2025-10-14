@@ -38,17 +38,22 @@
 					<div class="form-section">Message Purpose:</div>
 					<div class="radio-group">
 						<input type="radio" name="purpose" id="general" value="General Inquiry" checked>
-						<label for="purpose">General Inquiry</label>
+						<label for="general">General Inquiry</label>
 
 						<input type="radio" name="purpose" id="booking" value="Booking Request">
-						<label for="purpose">Reservation Question</label>
+						<label for="booking">Reservation Question</label>
 
 						<input type="radio" name="purpose" id="feedback" value="Feedback">
-						<label for="purpose">Website Suggestion</label>
+						<label for="feedback">Website Suggestion</label>
 					</div>
 
 					<label for="message">Message:</label>
 					<textarea id="message" name="message" rows="5" required></textarea>
+
+					<div class="checks">
+						<input type="checkbox" name="subscribe" id="subscribe">
+						<label for="subscribe">Please subscribe me to the monthly newsletter</label>
+					</div>
 
 					<button type="submit">Send Message</button>
 				</form>
