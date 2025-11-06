@@ -1,0 +1,380 @@
+/* ========================================
+   CSS Variables (Custom Properties)
+   ======================================== */
+:root {
+    --color-primary: #8262d3;
+    --color-primary-dark: #260a6e;
+    --color-accent: #007aff;
+    --color-text: #222;
+    --color-text-inverse: #fff;
+    --color-bg: #ffffff;
+    --color-bg-alt: #eee;
+    --color-bg-tertiary: #f9f9f9;
+    --color-border: rgb(0 0 0 / 10%);
+    --color-shadow: rgb(14 30 37 / 30%);
+    --color-warning-bg: #fff3cd;
+    --color-warning-border: #ffeeba;
+    --color-warning-text: #856404;
+    --color-error-bg: #f8d7da;
+    --color-error-border: #f5c6cb;
+    --color-error-text: #721c24;
+    --byuiblue: #0057b8;
+
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --transition-speed: 0.18s;
+    --box-shadow-sm: 0 1px 15px var(--color-shadow);
+    --box-shadow-md: 0 8px 24px rgb(0 122 255 / 12%);
+    --box-shadow-lg: 0 16px 36px rgb(255 90 95 / 20%);
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main.page {
+    flex: 1 0 auto;
+}
+
+footer {
+    margin-top: auto;
+    background-color: var(--byuiblue);
+    color: var(--color-text-inverse);
+}
+
+form {
+    margin: 1rem auto;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--box-shadow-sm);
+}
+
+form label {
+    margin: 0 0.5rem 0 0;
+    color: var(--color-text);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+input[type="text"] {
+    flex: 1 1 auto;
+    font-size: 1.1rem;
+    min-width: 0;
+    height: 3rem;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    background: #bbb;
+    transition: box-shadow var(--transition-speed) ease,
+        border-color var(--transition-speed) ease,
+        background var(--transition-speed) ease;
+    box-shadow: none;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    box-shadow: var(--box-shadow-md);
+    background: #bbb;
+}
+
+button#runAudit {
+    height: 3rem;
+    padding: 0 1rem;
+    border-radius: var(--border-radius);
+    border: none;
+    color: var(--color-text-inverse);
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgb(255 90 95 / 10%);
+    transition: transform 0.12s ease,
+        box-shadow 0.12s ease,
+        opacity 0.12s ease;
+}
+
+button#runAudit:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-lg);
+    opacity: 0.98;
+}
+
+/* Stack form elements on small screens */
+@media (max-width: 520px) {
+    form {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.6rem;
+    }
+
+    form label {
+        align-self: flex-start;
+        padding-left: 6px;
+    }
+
+    input[type="text"],
+    button#runAudit {
+        width: 80%;
+    }
+}
+
+#report {
+    margin: 1rem;
+}
+
+#report h3 {
+    margin: 1rem 0 0 0;
+}
+
+#report .url {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0.5rem;
+    background-color: var(--color-bg-alt);
+    font-size: smaller;
+}
+
+#report .url span:nth-of-type(2n-1) {
+    text-align: right;
+}
+
+#message {
+    width: fit-content;
+    display: none;
+    margin: 0 auto;
+    padding: 0.5rem;
+}
+
+.lineitem {
+    margin: 0.5rem 0;
+    display: grid;
+    grid-template-columns: 125px 35px 1fr;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg) 0;
+    background-color: var(--color-bg-alt);
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    padding: 0.35rem 0.75rem;
+    border: none;
+    border-radius: var(--border-radius-lg) 0;
+    background-color: #000;
+    color: var(--color-text-inverse);
+    font-size: smaller;
+    font-weight: 700;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+.mark {
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+}
+
+.standard {
+    justify-content: left;
+    font-size: smaller;
+    padding: 0.5rem 1rem;
+}
+
+.standard p {
+    margin: 0;
+}
+
+.errornote {
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: var(--color-error-bg);
+    border: 1px solid var(--color-error-border);
+    border-radius: var(--border-radius);
+    color: var(--color-error-text);
+}
+
+.warningnote {
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    background-color: var(--color-warning-bg);
+    border: 1px solid var(--color-warning-border);
+    border-radius: var(--border-radius);
+    color: var(--color-warning-text);
+}
+
+.colhead {
+    background-color: #000;
+    color: var(--color-text-inverse);
+    font-weight: 700;
+    font-size: larger;
+    text-align: center;
+}
+
+.title {
+    background-color: #000;
+    color: var(--color-text-inverse);
+    text-align: center;
+    font-weight: 700;
+}
+
+dialog .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+dialog>* {
+    padding: 0.25rem;
+}
+
+dialog::backdrop {
+    background: rgb(0 0 0 / 40%);
+}
+
+.link-list {
+    margin: 0 0 0 25px;
+    padding: 0;
+}
+
+.link-list li {
+    margin: 0;
+}
+
+.grid-list {
+    margin-top: 0.25rem;
+    display: grid;
+    grid-template-columns: 1fr 90px 1fr;
+}
+
+.grid-list div {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-top: none;
+}
+
+.linkslayout {
+    grid-template-columns: 200px 1fr 60px;
+}
+
+.grid-item {
+    background-color: var(--color-bg);
+}
+
+.anchors {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color: var(--color-bg);
+}
+
+.anchors> :nth-child(4n + 3),
+.anchors> :nth-child(4n + 4) {
+    background-color: var(--color-bg-alt);
+    padding: 0.5rem;
+}
+
+.twocolumns {
+    grid-column: 2 / 4;
+}
+
+.resFlex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.resFlex span {
+    width: 150px;
+    margin: 0.15rem;
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    font-weight: 700;
+}
+
+details {
+    margin: 0;
+    background-color: var(--color-bg);
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+details ul,
+details li {
+    margin: 0;
+}
+
+.css-stats-box {
+    margin: 10px 0;
+    padding: 10px;
+    background: rgb(249 249 249);
+    border: 1px solid rgb(221 221 221);
+    border-radius: 4px;
+}
+
+.css-stats-title {
+    margin-top: 0;
+}
+
+.css-stats-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 10px;
+    border-top: 1px solid rgb(221 221 221);
+}
+
+.css-stats-grid>div {
+    padding: 5px 0;
+    border-bottom: 1px solid rgb(221 221 221);
+}
+.color-chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 10px 0;
+}
+
+.color-chart-grid > div {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+}
+
+.color-chart-grid .color-item {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-chart-grid .color-swatch {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(0 0 0 / 10%);
+    border-radius: 3px;
+    flex-shrink: 0;
+}
