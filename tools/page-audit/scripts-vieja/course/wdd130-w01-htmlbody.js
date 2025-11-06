@@ -237,7 +237,7 @@ export async function wdd130w01htmlbody(phtml, url) {
 
         const imgItem = createLineItem({
             label: 'profile &lt;img&gt;',
-            passed: 'review',
+            passed: imgPassed,
             standardHtml: `The <code>&lt;main&gt;</code> element must contain at least one image with a valid extension and named <strong>profile</strong> in the <strong>images</strong> folder. All image files must be ✔correctly referenced, ✔be optimized(<= 125 kB), ✔have alt attribute.<br><br>${messageDetail}${imgTableHtml ? ` <br>${imgTableHtml}` : ''}`
         });
         appendToReport(imgItem);

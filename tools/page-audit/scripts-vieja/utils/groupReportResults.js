@@ -33,7 +33,13 @@ export async function groupReportResults(reportEl = null) {
       continue;
     }
     if (ds === 'pass') {
-      passing.push(item);
+      // If the visible text contains manual-review markers, treat it as review even when data-status says 'pass'
+      const txt = (item.textContent || '');
+      if (txt.includes('👀') || txt.includes('➡️')) {
+        review.push(item);
+      } else {
+        passing.push(item);
+      }
       continue;
     }
 
@@ -71,6 +77,19 @@ export async function groupReportResults(reportEl = null) {
     report.appendChild(p);
   }
 
+  // If there are no errors and there are passing checks, show a submission-ready banner
+  if (errors.length === 0 && passing.length > 0) {
+    const banner = document.createElement('div');
+    banner.className = 'submission-ready callout';
+    const bh = document.createElement('h3');
+    bh.textContent = '✅ This assignment is ready to submit!';
+    banner.appendChild(bh);
+    const bp = document.createElement('p');
+    bp.textContent = 'Automated checks passed. Review any manual items below and submit when ready.';
+    banner.appendChild(bp);
+    report.appendChild(banner);
+  }
+
   // Helper to build a section with optional description
   const buildSection = (title, items, className = '', description = '') => {
     const section = document.createElement('div');
@@ -97,10 +116,16 @@ export async function groupReportResults(reportEl = null) {
     return section;
   };
 
-  // Append in order: Errors, Manual review, Passing
-  report.appendChild(buildSection('❌ Errors', errors, 'errors', 'These are items that failed automated checks for this week\'s assignment. Please review each error and follow the hint text to fix the problem.'));
-  report.appendChild(buildSection('👀 Needs manual review', review, 'review', 'These items could not be fully validated automatically and require a human review to ensure they meet the assignment requirements.'));
-  report.appendChild(buildSection('✅ Passing checks', passing, 'passing', 'This section contains items that met the automated checks for the assignment.'));
+  // Append in order: Errors (only if any), Manual review, Passing
+  if (errors.length > 0) {
+    report.appendChild(buildSection('❌ Errors', errors, 'errors', 'These are items that failed automated checks for this week\'s assignment. Please review each error and follow the hint text to fix the problem.'));
+  }
+  if (review.length > 0) {
+    report.appendChild(buildSection('👀 Needs manual review', review, 'review', 'These items could not be fully validated automatically and require a human review to ensure they meet the assignment requirements.'));
+  }
+  if (passing.length > 0) {
+    report.appendChild(buildSection('✅ Passing checks', passing, 'passing', 'This section contains items that met the automated checks for the assignment.'));
+  }
 
   return { errors: errors.length, review: review.length, passing: passing.length };
 }
